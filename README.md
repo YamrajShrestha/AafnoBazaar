@@ -1,1 +1,1 @@
-# AafnoBazaar
+# aafno-bazaar
