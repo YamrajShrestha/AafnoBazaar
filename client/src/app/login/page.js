@@ -3,6 +3,8 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import Image from "next/image";
+import Link from "next/link";
 
 const SignupSchema = Yup.object().shape({
   phoneNumber: Yup.string()
@@ -15,8 +17,14 @@ const SignupSchema = Yup.object().shape({
     .required("Required"),
 });
 
-const Home = () => (
+const loginPage = () => (
   <div>
+    <Image
+      src="/logo.png"
+      width={120}
+      height={100}
+      alt="Picture of the author"
+    />
     <h1>Login</h1>
     <Formik
       initialValues={{
@@ -40,6 +48,12 @@ const Home = () => (
           {errors.password && touched.password ? (
             <div>{errors.password}</div>
           ) : null}
+          <span>Don't have an account yet?</span> <br />
+          <Link href="/register">
+            <button>Sign Up</button>
+          </Link>
+          <br />
+          <br />
           <button type="submit">Submit</button>
         </Form>
       )}
@@ -47,4 +61,4 @@ const Home = () => (
   </div>
 );
 
-export default Home;
+export default loginPage;
