@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { message } from "antd";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import Image from "next/image";
@@ -23,13 +24,21 @@ const SignupSchema = Yup.object().shape({
 });
 
 const registerPage = () => {
-  const handleRegister = (formFields) => {
-    fetch("http://localhost:4000/register", {
+  const [messageApi, contextHolder] = message.useMessage();
+  const handleRegister = async (values) => {
+    const res = await fetch("http://localhost:4000/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formFields),
+      body: JSON.stringify(values),
     });
+    const data = await res.json();
+    messageApi.open({
+      type: res.status == 200 ? "success" : "error",
+      content: data.msg,
+    });
+    console.log(res);
   };
+
   return (
     <div>
       <Image
@@ -53,6 +62,7 @@ const registerPage = () => {
       >
         {({ errors, touched }) => (
           <Form>
+            {contextHolder}
             <Field name="phoneNumber" placeholder="Phone Number" /> <br />
             {errors.phoneNumber && touched.phoneNumber ? (
               <div>{errors.phoneNumber}</div>
