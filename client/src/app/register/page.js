@@ -47,7 +47,7 @@ const registerPage = () => {
         height={100}
         alt="Picture of the author"
       />
-      <h1>Signup</h1>
+      <h1>Register</h1>
       <Formik
         initialValues={{
           phoneNumber: "",

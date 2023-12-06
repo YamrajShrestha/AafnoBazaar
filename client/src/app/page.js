@@ -1,53 +1,49 @@
-'use client'
+"use client";
 
-import React from 'react';
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { AudioOutlined } from '@ant-design/icons';
+import { Input, Space } from 'antd';
+const { Search } = Input;
+const suffix = (
+  <AudioOutlined
+    style={{
+      fontSize: 16,
+      color: '#1677ff',
+    }}
+  />
+);
 
-const SignupSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-  lastName: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-  email: Yup.string().email('Invalid email').required('Required'),
-});
-
+const onSearch = (value, _e, info) => console.log(info?.source, value);
 const Home = () => (
-  <div>
-    <h1>Signup</h1>
-    <Formik
-      initialValues={{
-        firstName: '',
-        lastName: '',
-        email: '',
-      }}
-      validationSchema={SignupSchema}
-      onSubmit={values => {
-        // same shape as initial values
-        console.log(values);
-      }}
-    >
-      {({ errors, touched }) => (
-        <Form>
-          <Field name="firstName" />
-          {errors.firstName && touched.firstName ? (
-            <div>{errors.firstName}</div>
-          ) : null}
-          <Field name="lastName" />
-          {errors.lastName && touched.lastName ? (
-            <div>{errors.lastName}</div>
-          ) : null}
-          <Field name="email" type="email" />
-          {errors.email && touched.email ? <div>{errors.email}</div> : null}
-          <button type="submit">Submit</button>
-        </Form>
-      )}
-    </Formik>
+  <div className="con">
+  <div className="flex">
+    <Image
+      src="/logo.png"
+      width={120}
+      height={100}
+      alt="Picture of the author"
+    />
+<nav>
+  <ul className="flex">
+    <li>
+      <Link href='/login'>Login</Link>
+    </li>
+    <li>
+      <Link href='/register'>Register</Link>
+    </li>
+  </ul>
+</nav>
+<Search
+      placeholder="Search here..."
+      enterButton="Search"
+      size="large"
+      suffix={suffix}
+      onSearch={onSearch}
+    />
+  </div>
   </div>
 );
 
-export default Home
+export default Home;

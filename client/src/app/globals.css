@@ -26,4 +26,29 @@ body {
     rgb(var(--background-start-rgb));
 }
  */
+.con{
+  max-width: 1200px;
+  margin: auto;
+}
+
+ .flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+
+ nav ul{
+  list-style: none;
+ }
+ nav ul li{
+  display: inline-block;
+  margin: 0 12px;
+ }
  
+ a{
+  text-decoration: none;
+ }
+
+ body{
+  text-align: center;
+ }
